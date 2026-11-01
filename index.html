@@ -293,6 +293,26 @@
     .tx-act.go{background-color:#FFF6E0!important;color:#8A5E12!important;border-color:rgba(176,124,34,.35)!important}
     .tx-foot{font-size:11.5px;color:#55607A;text-align:center;margin-top:16px;padding-top:12px;border-top:1px solid #E2E6EF;line-height:1.6}
     .tx-foot em{color:#7A869E}
+    /* ── DISCOVER (from Nanette Levi build) ── */
+    .disc-city-bar{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+    .disc-city-bar::-webkit-scrollbar{display:none}
+    .disc-city-pill{flex-shrink:0;background:#FFFFFF;border:1px solid #D8E4F0;color:#5A7590;padding:9px 16px;border-radius:99px;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s,color .15s,border-color .15s}
+    .disc-city-pill:active{background:#EBF2FA}
+    .disc-city-pill.active{background-color:#0D2847!important;color:#FFFFFF!important;border-color:#0D2847!important}
+    .disc-scherrer{background:linear-gradient(180deg,#0D2847 0%,#142647 100%);color:#f3eee0;border-radius:18px;padding:22px 20px 20px;margin-bottom:14px;position:relative;overflow:hidden;border:1px solid rgba(176,124,34,.2)}
+    .disc-scherrer::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(176,124,34,.2) 0%,transparent 70%);pointer-events:none}
+    .disc-scherrer-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#B07C22;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;position:relative}
+    .disc-scherrer-label::before{content:'';width:16px;height:1px;background:#B07C22}
+    .disc-scherrer-title{font-family:'Cormorant Garamond','Palatino Linotype',Georgia,serif;font-size:26px;font-weight:300;letter-spacing:-.01em;margin:0 0 4px;color:#f3eee0;position:relative}
+    .disc-scherrer-by{font-family:'Cormorant Garamond','Palatino Linotype',Georgia,serif;font-style:italic;font-size:15px;color:#B07C22;margin-bottom:14px;position:relative}
+    .disc-scherrer-by .copy{font-size:11px;font-style:normal;letter-spacing:.06em;opacity:.7;margin-right:4px;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    .disc-scherrer-p{font-size:13px;line-height:1.6;color:rgba(243,238,224,.78);margin:0 0 16px;position:relative}
+    .disc-scherrer-cta{display:inline-flex;align-items:center;gap:6px;background:#B07C22;color:#0D2847;padding:10px 18px;border-radius:99px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;text-decoration:none;position:relative}
+    .disc-scherrer-cta:active{opacity:.85}
+    .disc-scherrer-ig{display:inline-flex;align-items:center;gap:5px;padding:9px 14px;border-radius:99px;font-size:11.5px;font-weight:600;letter-spacing:.05em;color:#f3eee0;border:1px solid rgba(244,229,191,.3);text-decoration:none;transition:background .15s;margin-top:2px}
+    .disc-scherrer-ig:active{background:rgba(255,255,255,.1)}
+    .disc-scherrer-tip{margin-top:14px;font-size:12.5px;color:rgba(243,238,224,.55);font-style:italic;font-family:'Cormorant Garamond','Palatino Linotype',Georgia,serif;line-height:1.55;position:relative;padding-left:12px;border-left:1px solid rgba(176,124,34,.3)}
+    .disc-note{font-size:12px;color:#5A7590;font-style:italic;line-height:1.55;margin-bottom:10px;padding:8px 12px;background:#FBF5E6;border-radius:8px;border-left:2px solid rgba(176,124,34,.4)}
   </style>
 </head>
 <body style="background-color:#FAF8F4">
@@ -303,7 +323,7 @@
       <span class="hdr-flag">🗾</span>
       <div>
         <div class="hdr-dest">Tokyo · February 2027</div>
-        <div class="hdr-hc">Happy Camper · v1</div>
+        <div class="hdr-hc">Happy Camper · v2</div>
       </div>
     </div>
     <div class="hdr-right">
@@ -349,7 +369,6 @@
    Weather: Open-Meteo, free, no API key required.
 ═══════════════════════════════════════════════════════ */
 var FX_RATE = 157.58;   /* JPY per USD — planning canvas (YEN USD 0.00634598) */
-var FX = { USD:{rate:157.58,flag:'🇺🇸',name:'US Dollar'}, EUR:{rate:183,flag:'🇪🇺',name:'Euro'}, GBP:{rate:211,flag:'🇬🇧',name:'British Pound'} };
 var WX_LAT = 35.6748, WX_LNG = 139.7605;   /* The Peninsula Tokyo */
 
 /* ═══════════════════════════════════════════════════════
@@ -570,40 +589,49 @@ var TABLES = {
   ]
 };
 
-/* ── DISCOVER — Tokyo in February ── */
-var DISCOVER_TOKYO=[
-  { cat:'February Season',
-    items:[
-      ['Plum blossoms — Yushima Tenjin','Yushima Tenjin Shrine Tokyo','Ume festival runs through February and into March'],
-      ['Plum blossoms — Koishikawa Korakuen','Koishikawa Korakuen Garden','Edo-period stroll garden with a plum grove'],
-      ['Hamarikyu Gardens + teahouse','Hamarikyu Gardens Tokyo','Matcha in the Nakajima teahouse; early rapeseed blossom'],
-      ['Hibiya Park — across from the hotel','Hibiya Park Tokyo','A quiet morning loop before breakfast']
+/* ═══ DISCOVER (Nanette Levi build) ═══ */
+var DISCOVER = {
+  Tokyo:[
+    { cat:'Sightseeing', items:[
+      ['Senso-ji & Asakusa','Sensoji Asakusa Tokyo','Tokyo\'s oldest temple; Nakamise shopping street'],
+      ['Meiji Jingu','Meiji Jingu','Forest shrine beside Yoyogi Park'],
+      ['Shibuya Crossing & Shibuya Sky','Shibuya Sky','Iconic scramble + rooftop observation deck'],
+      ['teamLab (Planets / Borderless)','teamLab Planets Tokyo','Immersive digital-art museums'],
+      ['Imperial Palace East Gardens','Imperial Palace East Gardens','Former Edo Castle grounds & gardens'],
+      ['Tokyo Skytree','Tokyo Skytree','634 m tower; observation decks & Solamachi'],
+      ['Toyosu & Tsukiji Outer Market','Tsukiji Outer Market','Fish market & legendary street-food lanes'],
+      ['Shinjuku Gyoen','Shinjuku Gyoen','Expansive landscaped garden; early plum blossom'],
+      ['Nezu Museum','Nezu Museum Tokyo','Asian art & a serene strolling garden'],
+      ['Ueno Park & museums','Ueno Park','Tokyo National Museum, zoo, galleries']
     ]},
-  { cat:'Fish, Sake & Ingredients',
-    items:[
-      ['Toyosu Market — tuna auction deck','Toyosu Fish Market Tokyo','Early morning; closed Sundays and some Wednesdays'],
-      ['Tsukiji Outer Market','Tsukiji Outer Market Tokyo','Knives, katsuobushi, tamagoyaki and breakfast stalls'],
-      ['Hasegawa Saketen — Azabu-Juban','Hasegawa Saketen Azabujuban','Fine sake shop with a standing bar — steps from Meino'],
-      ['Nihombashi Mitsukoshi depachika','Nihombashi Mitsukoshi Main Store','Tokyo’s grandest department-store food hall'],
-      ['Ninben — katsuobushi since 1699','Ninben Nihonbashi Honten','Dashi bar and bonito flakes, Coredo Muromachi'],
-      ['Kappabashi — knives & kitchenware','Kappabashi Tokyo','Kama-asa and Kamata for knives']
+    { cat:'Food & Drink', items:[
+      ['Sushi','Sushi Ginza Tokyo','Toyosu counters to Ginza omakase (Saito, Sugita)'],
+      ['Tempura','Tempura Tokyo','Edomae tempura (Kondo, Mikawa Zezankyo)'],
+      ['Yakitori','Yakitori Tokyo','Omoide Yokocho to high-end (Torishiki)'],
+      ['Yakiniku & wagyu','Yakiniku Tokyo wagyu','Premium grilled wagyu (Yoroniku, Toraji)'],
+      ['Ramen','Ramen Tokyo','Every style; shoyu, tsukemen, tonkotsu'],
+      ['Kaiseki / haute Japanese','Kaiseki Tokyo','RyuGin, Ishikawa, Den — modern & classic'],
+      ['Depachika food halls','Isetan depachika','Basement gourmet halls (Isetan, Takashimaya)'],
+      ['Cocktail bars','Bar High Five Ginza','World-class bars (High Five, Star Bar, SG Club)'],
+      ['Unagi','Unagi Nodaiwa Tokyo','Eel specialists (Nodaiwa, Obana)'],
+      ['Soba','Soba Kanda Matsuya Tokyo','Handmade soba (Sarashina, Kanda Matsuya)']
     ]},
-  { cat:'Sightseeing',
-    items:[
-      ['Senso-ji + Asakusa backstreets','Senso-ji Temple Asakusa Tokyo',null],
-      ['Meiji Shrine + Yoyogi Park walk','Meiji Shrine Tokyo',null],
-      ['Nezu Museum — Kengo Kuma','Nezu Museum Aoyama Tokyo','Japanese and East Asian art in a serene garden'],
-      ['teamLab Borderless','teamLab Borderless Azabudai Hills Tokyo','Book timed tickets in advance'],
-      ['Imperial Palace East Gardens','Imperial Palace East Garden Tokyo','A 10-minute walk from the Peninsula; closed Mon and Fri'],
-      ['Ningyocho + Amazake Yokocho','Amazake Yokocho Ningyocho Tokyo','Old Edo shopping lane — pair with Sonoji']
-    ]},
-  { cat:'Evenings',
-    items:[
-      ['Bar Benfiddich — cocktail omakase','Bar Benfiddich Shinjuku Tokyo',null],
-      ['Bar High Five — Ginza','Bar High Five Ginza Tokyo','Classic Ginza cocktail craft'],
-      ['Peter Bar — Peninsula 24F','The Peninsula Tokyo Peter','Night views over the Imperial Palace']
+    { cat:'Shopping', items:[
+      ['Ginza','Ginza Tokyo','Luxury flagships; Ginza Six, Wako, Mitsukoshi'],
+      ['Isetan Shinjuku','Isetan Shinjuku','Flagship department store; famed depachika'],
+      ['Nihonbashi (Mitsukoshi/Takashimaya)','Nihonbashi Mitsukoshi','Historic department-store district'],
+      ['Omotesando & Aoyama','Omotesando','Fashion & architecture flagships'],
+      ['Daikanyama T-Site (Tsutaya)','Daikanyama Tsutaya','Design-led bookstore & lifestyle complex'],
+      ['Nakameguro','Nakameguro','Canal-side boutiques & cafes'],
+      ['Kappabashi Kitchen Town','Kappabashi Tokyo','Knives, kitchenware & sample food'],
+      ['Akihabara','Akihabara','Electronics, anime & hobby shops'],
+      ['Ginza Wako / Mikimoto','Ginza Wako','Landmark clock, watches & pearls'],
+      ['Miyashita Park / Shibuya Parco','Miyashita Park Shibuya','Rooftop park + fashion & lifestyle floors']
     ]}
-];
+  ]
+};
+var DISCOVER_CITIES = ['Tokyo'];
+var DISCOVER_ACTIVE = 'Tokyo';
 
 /* ══════════════ HELPERS ══════════════ */
 function esc(s){if(s===null||s===undefined)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -821,75 +849,125 @@ function renderTables(){
 
 /* ══════════════ RENDER: DISCOVER ══════════════ */
 function renderDiscover(){
-  var h='<div class="disc-banner"><h2>🗼 Discover Tokyo</h2><p>February season · Fish &amp; sake · Sightseeing · Evenings</p></div>'
-    +'<div class="disc-feature"><div class="disc-feature-label">Editor’s Reference</div>'
-    +'<div class="disc-feature-title">The Ultimate Shopping List</div><div class="disc-feature-by">John Scherrer</div>'
-    +'<p class="disc-feature-p">A hand-built Google Map of Japan’s most carefully chosen shops — vintage, design, denim, ceramics, kitchenware, craft. The best on-the-ground reference for serious shopping in Tokyo.</p>'
-    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><a class="disc-feature-cta" href="https://maps.app.goo.gl/y5dzkZR4L56yY3po8" target="_blank" rel="noopener">Open the Map →</a>'
-    +'<a class="disc-feature-ig" href="https://www.instagram.com/bigtime_makin_it_nice" target="_blank" rel="noopener">📷 @bigtime_makin_it_nice</a></div></div>'
-    +'<div class="disc-feature plum"><div class="disc-feature-label">Editor’s Reference</div>'
-    +'<div class="disc-feature-title">Tokyo Coffee Shops</div><div class="disc-feature-by">Alex Rivera</div>'
-    +'<p class="disc-feature-p">Speciality roasters, neighbourhood kissaten and hidden gems — open with live location on and look for nearby pins.</p>'
-    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><a class="disc-feature-cta" href="https://maps.app.goo.gl/YxU9bZiQoawn7oqy9?g_st=i" target="_blank" rel="noopener">Open the Map →</a>'
-    +'<a class="disc-feature-ig" href="https://www.instagram.com/alexrivio" target="_blank" rel="noopener">📷 @alexrivio</a></div></div>';
-  DISCOVER_TOKYO.forEach(function(sec){
-    h+='<div class="disc-card"><div class="disc-card-head"><div class="disc-card-head-title">'+esc(sec.cat)+'</div></div><div class="disc-card-body">';
-    sec.items.forEach(function(it){
-      h+='<a class="disc-item" href="'+gm(it[1])+'" target="_blank" rel="noopener"><div class="disc-item-info"><div class="disc-item-name">'+esc(it[0])+'</div>'
-        +(it[2]?'<div class="disc-item-sub">'+esc(it[2])+'</div>':'')+'</div><div class="disc-arrow">→</div></a>';
+  var el=document.getElementById('tab-discover');
+  var city=DISCOVER_ACTIVE;
+  var sections=DISCOVER[city]||[];
+  var h='<div class="disc-banner"><h2>🗾 Discover '+esc(city)+'</h2><p>Sightseeing · Food &amp; Drink · Shopping</p></div>';
+  if(DISCOVER_CITIES.length>1){h+='<div class="disc-city-bar" role="tablist" aria-label="Select city">';
+  DISCOVER_CITIES.forEach(function(c){
+    h+='<button class="disc-city-pill'+(c===city?' active':'')+'" data-disc-city="'+esc(c)+'">'+esc(c)+'</button>';
+  });
+  h+='</div>';}
+  h+='<div class="disc-scherrer">'
+    +'<div class="disc-scherrer-label">Editor\'s Reference</div>'
+    +'<div class="disc-scherrer-title">The Ultimate Shopping List</div>'
+    +'<div class="disc-scherrer-by"><span class="copy">©</span>John Scherrer</div>'
+    +'<p class="disc-scherrer-p">An extraordinary, hand-built Google Map of Japan\'s most considered shops — vintage, design, denim, ceramics, kitchenware, craft. The single best on-the-ground reference for serious shopping in Tokyo, Kyoto and beyond.</p>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">'
+    +'<a class="disc-scherrer-cta" href="https://maps.app.goo.gl/y5dzkZR4L56yY3po8?g_st=i" target="_blank" rel="noopener">Open the Map →</a>'
+    +'<a class="disc-scherrer-ig" href="https://www.instagram.com/bigtime_makin_it_nice" target="_blank" rel="noopener">📷 @bigtime_makin_it_nice</a>'
+    +'</div>'
+    +'<div class="disc-scherrer-tip">Most powerful when used alongside your live location — open the map and look for nearby pins wherever the afternoon ends up.</div>'
+    +'</div>';
+  h+='<div class="disc-scherrer" style="background:linear-gradient(180deg,#1a0f2e 0%,#2d1b47 100%);border-color:rgba(176,124,34,.15);">'
+    +'<div class="disc-scherrer-label">Editor\'s Reference</div>'
+    +'<div class="disc-scherrer-title">The Ultimate Coffee List</div>'
+    +'<div class="disc-scherrer-by"><span class="copy">©</span>Alex Rivera</div>'
+    +'<p class="disc-scherrer-p">A global map of Alex\'s favourite coffee shops — speciality roasters, neighbourhood kissaten, and hidden gems across the world, including an excellent selection throughout Japan.</p>'
+    +'<div class="disc-scherrer-tip" style="margin-bottom:14px">Open the map with your live location enabled and filter to what\'s nearby — the best way to find a great cup wherever the day takes you.</div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">'
+    +'<a class="disc-scherrer-cta" href="https://maps.app.goo.gl/YxU9bZiQoawn7oqy9?g_st=i" target="_blank" rel="noopener">Open the Map →</a>'
+    +'<a class="disc-scherrer-ig" href="https://www.instagram.com/alexrivio" target="_blank" rel="noopener">📷 @alexrivio</a>'
+    +'</div></div>';
+  sections.forEach(function(section){
+    h+='<div class="disc-card"><div class="disc-card-head"><div class="disc-card-head-title">'+esc(section.cat)+'</div></div><div class="disc-card-body">';
+    section.items.forEach(function(item){
+      var subHtml=item[2]?'<div class="disc-item-sub">'+esc(item[2])+'</div>':'';
+      h+='<a class="disc-item" href="'+gm(item[1])+'" target="_blank" rel="noopener">'
+        +'<div class="disc-item-info"><div class="disc-item-name">'+esc(item[0])+'</div>'+subHtml+'</div>'
+        +'<div class="disc-arrow">→</div></a>';
     });
     h+='</div></div>';
   });
-  document.getElementById('tab-discover').innerHTML=h;
+  el.innerHTML=h;
+  el.querySelectorAll('[data-disc-city]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var c=btn.getAttribute('data-disc-city');
+      if(c&&DISCOVER[c]){DISCOVER_ACTIVE=c;renderDiscover();document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'});}
+    });
+  });
 }
 
 /* ══════════════ RENDER: UTILITIES ══════════════ */
 function renderUtilities(){
   document.getElementById('tab-utilities').innerHTML=''
     +'<div class="section-label">Currency Converter</div>'
-    +'<div class="util-card"><div class="util-card-title">JPY ↔ <span id="fx-code">USD</span></div>'
-    +'<div class="fx-sel"><button type="button" class="fx-cur on" data-cur="USD">🇺🇸 USD</button><button type="button" class="fx-cur" data-cur="EUR">🇪🇺 EUR</button><button type="button" class="fx-cur" data-cur="GBP">🇬🇧 GBP</button></div>'
+    +'<div class="util-card"><div class="util-card-title">JPY ↔ USD</div>'
     +'<div class="fx-row">'
-    +'<div class="fx-group"><label class="fx-label" for="fx-jpy">🇯🇵 Japanese Yen</label><input class="fx-input" id="fx-jpy" type="number" inputmode="numeric" value="10000"></div>'
-    +'<button type="button" class="fx-swap-btn" id="fx-swap" aria-label="Reset">⇋</button>'
-    +'<div class="fx-group"><label class="fx-label" for="fx-usd" id="fx-lbl">🇺🇸 US Dollar</label><input class="fx-input" id="fx-usd" type="number" inputmode="decimal"></div>'
-    +'</div><div class="fx-rate-note" id="fx-note"></div></div>'
-    +'<div class="section-label">February in Tokyo</div>'
-    +'<div class="util-card"><ul class="info-list">'
-    +'<li><span class="info-emoji">🎌</span><div class="info-text"><strong>Thu 11 Feb · National Foundation Day</strong>A public holiday — your arrival day. Some restaurants and shops keep Sunday hours.</div></li>'
-    +'<li><span class="info-emoji">💝</span><div class="info-text"><strong>Sun 14 Feb · Valentine’s Day</strong>In Japan women give chocolate; restaurants are busy and taxis scarcer. Leave in good time for Meino.</div></li>'
-    +'<li><span class="info-emoji">🌸</span><div class="info-text"><strong>Plum blossom season</strong>Ume, not sakura, flowers in February — Yushima Tenjin and Koishikawa Korakuen are the classic spots.</div></li>'
-    +'<li><span class="info-emoji">🐟</span><div class="info-text"><strong>Peak winter fish</strong>Tuna is at its fattiest, and February brings kan-buri, shirauo and the best of the winter shellfish.</div></li>'
-    +'</ul></div>'
+    +'<div class="fx-group"><div class="fx-label">🇯🇵 Japanese Yen</div><input class="fx-input" id="fx-jpy" type="text" inputmode="numeric" value="10,000"></div>'
+    +'<button class="fx-swap-btn" id="fx-swap">⇋</button>'
+    +'<div class="fx-group"><div class="fx-label">🇺🇸 US Dollar</div><input class="fx-input" id="fx-usd" type="text" inputmode="decimal"></div>'
+    +'</div><div class="fx-rate-note">Rate: 1 USD = '+FX_RATE.toFixed(2)+' JPY · Source: planning canvas</div></div>'
     +'<div class="section-label">Quick Reference</div>'
     +'<div class="util-card"><ul class="info-list">'
-    +'<li><span class="info-emoji">💴</span><div class="info-text"><strong>Cash is still useful</strong>Top counters take cards, but carry ¥30,000–50,000 for taxis and small shops. 7-Eleven and Japan Post ATMs accept foreign cards.</div></li>'
-    +'<li><span class="info-emoji">🧥</span><div class="info-text"><strong>February weather</strong>Typically 2–10°C, dry and sunny, cold after dark. A warm coat, scarf and comfortable shoes.</div></li>'
-    +'<li><span class="info-emoji">🚕</span><div class="info-text"><strong>Taxis: GO app</strong>Japan’s main taxi app, in English, takes foreign cards. Tap 🚕 Taxi on any stop for the address in Japanese to show the driver.</div></li>'
-    +'<li><span class="info-emoji">📱</span><div class="info-text"><strong>Suica (Apple Wallet)</strong>Wallet app → + → Transit card → Suica. Works on all Tokyo trains and at convenience stores.</div></li>'
-    +'<li><span class="info-emoji">⏰</span><div class="info-text"><strong>Time zone: JST = UTC+9</strong>14 hours ahead of New York in February. No daylight saving.</div></li>'
-    +'<li><span class="info-emoji">🔌</span><div class="info-text"><strong>Electricity: 100V · Type A</strong>US plugs fit without an adapter.</div></li>'
-    +'<li><span class="info-emoji">🍽️</span><div class="info-text"><strong>Dietary notes</strong>No allergies or restrictions on file. If anything changes, tell Happy Camper and we will inform each restaurant.</div></li>'
+    +'<li><span class="info-emoji">💴</span><div class="info-text"><strong>Cash is useful</strong>Carry some yen — a few counters, taxis and small shops prefer cash. ATMs at 7-Eleven and Japan Post accept foreign cards.</div></li>'
+    +'<li><span class="info-emoji">🍁</span><div class="info-text"><strong>Mid-February</strong>Late winter in Tokyo — cold, dry and largely clear, roughly 2–10°C, with the plum blossom opening. A warm coat, scarf and layers; evenings are cold.</div></li>'
+    +'<li><span class="info-emoji">⏰</span><div class="info-text"><strong>Time Zone: JST = UTC+9</strong>No daylight saving. 14 h ahead of New York (EST).</div></li>'
+    +'<li><span class="info-emoji">🔌</span><div class="info-text"><strong>Electricity: 100V · Type A</strong>North American travellers need only a 3-to-2-prong adapter, no converter.</div></li>'
+    +'<li><span class="info-emoji">📲</span><div class="info-text"><strong>eSIM + Suica</strong>Activate an eSIM for mobile data before landing, and add Suica to Apple Wallet (Wallet → + → Transit card) for tap-and-go trains, buses and convenience stores.</div></li>'
     +'</ul></div>'
     +'<div class="section-label">Dining Etiquette</div>'
     +'<div class="util-card">'
-    +'<div class="rule-item critical"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No fragrance — critical</strong>No perfume, cologne, scented hair products or fabric softener on dining days. Even a trace disrupts the chef and other guests at the counter.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">⏰</span><div class="rule-text"><strong>Punctuality</strong>The meal starts at the same moment for the whole counter. Tokyo restaurants often sit on quiet back streets, so allow generous transfer time.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">💍</span><div class="rule-text"><strong>Protect the counter</strong>Remove rings, bracelets and watches at sushi counters. Many are single pieces of hinoki cypress.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">🍣</span><div class="rule-text"><strong>Eat nigiri at once</strong>Each piece is placed at its ideal temperature — eat it within seconds, by hand or chopsticks. The chef seasons it; no extra soy needed unless offered.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">📷</span><div class="rule-text"><strong>Ask before photographing</strong>Some counters don’t allow photos. When they do, keep it quick and discreet.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">💰</span><div class="rule-text"><strong>No tipping</strong>Tipping isn’t done in Japan. Say <em>Gochisousama deshita</em> to the chef after the meal instead.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">🔒</span><div class="rule-text"><strong>Reservations are firm</strong>Happy Camper’s access is built on years of trust. Once confirmed, a reservation is a commitment.</div></div>'
-    +'</div>';
-  var cur='USD';
-  var j=document.getElementById('fx-jpy'),u=document.getElementById('fx-usd');
-  function note(){document.getElementById('fx-note').textContent='1 '+cur+' ≈ '+FX[cur].rate.toFixed(2)+' JPY · fixed planning rate';document.getElementById('fx-code').textContent=cur;document.getElementById('fx-lbl').textContent=FX[cur].flag+' '+FX[cur].name;}
-  function fJ(){var v=parseFloat(j.value);u.value=isNaN(v)?'':(v/FX[cur].rate).toFixed(2);}
-  function fU(){var v=parseFloat(u.value);j.value=isNaN(v)?'':String(Math.round(v*FX[cur].rate));}
-  j.addEventListener('input',fJ);u.addEventListener('input',fU);
-  document.getElementById('fx-swap').addEventListener('click',function(){j.value='10000';fJ();});
-  document.querySelectorAll('.fx-cur').forEach(function(b){b.addEventListener('click',function(){cur=b.getAttribute('data-cur');document.querySelectorAll('.fx-cur').forEach(function(x){x.classList.toggle('on',x===b);});note();fJ();});});
-  note();fJ();
+    +'<div class="rule-item"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No Fragrance — Critical</strong>Avoid perfume, cologne, and scented products on dining days. Even a trace disrupts the chef and other guests at the counter — the single most important point at high-end Japanese restaurants.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">⏰</span><div class="rule-text"><strong>Punctuality</strong>Arrive on time or early — the meal begins together for everyone. Allow generous transfer time to quiet back-street addresses.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">💍</span><div class="rule-text"><strong>Protect the Counter</strong>Remove rings, bracelets, and watches at sushi counters — many are single pieces of precious Hinoki cypress.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">💰</span><div class="rule-text"><strong>No Tipping</strong>Not customary in Japan. Say <em>Gochisousama deshita</em> after the meal — deeply appreciated.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🔒</span><div class="rule-text"><strong>Reservations are Firm</strong>Once confirmed, reservations are commitments — cancellations damage relationships built over many seasons.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🥢</span><div class="rule-text"><strong>Chopsticks</strong>Never stand them upright in rice, and never pass food chopstick-to-chopstick — both echo funeral rites. To take from a shared dish, turn your chopsticks and use the clean ends.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">📷</span><div class="rule-text"><strong>Photography — ask first</strong>A quiet word before the first course settles it. Many counters allow the dish but not the room, never the flash, and never other guests. Some ask for nothing at all.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">⏱️</span><div class="rule-text"><strong>Eat at the chef&rsquo;s pace</strong>At a sushi counter each piece is finished the moment it is set down and is meant to be eaten within seconds — warm rice, cool fish. Fingers are perfectly correct. Tempura is the same: straight from the oil, eaten at once.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🍶</span><div class="rule-text"><strong>Soy and wasabi</strong>At the better counters the chef has already seasoned each piece — no soy dish will appear, and asking for one is a small slight. Where soy is served, dip the fish, never the rice, and don&rsquo;t stir wasabi into it.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🥂</span><div class="rule-text"><strong>Pouring</strong>Fill your companions&rsquo; glasses, not your own; someone will return the favour. Lift your glass slightly off the table to be poured.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">📵</span><div class="rule-text"><strong>Phones at the counter</strong>Silent and out of sight. Step outside for anything that cannot wait — in a ten-seat room, one call is heard by everyone.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🧼</span><div class="rule-text"><strong>The oshibori</strong>The warm towel is for your hands before the meal. Not the face, not the table — fold it and set it aside.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🍽️</span><div class="rule-text"><strong>Finish what is served</strong>Each course is portioned deliberately for you. Anything left is noticed and reported back to the kitchen. If a dish defeats you, say so warmly rather than leaving it.</div></div>'
+    +'</div>'
+    +'<div class="section-label">Dress Etiquette</div>'
+    +'<div class="util-card">'
+    +'<div class="rule-item"><span class="rule-icon">👔</span><div class="rule-text"><strong>The register is understated, not formal</strong>Almost nowhere in Japan asks for black tie. Clean, considered and quietly smart is what is expected — scruffiness reads as disrespect far more than informality does.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">👞</span><div class="rule-text"><strong>The reliable default for dinner</strong>A collared shirt, long trousers and proper shoes will carry you through every counter on your itinerary. An elegant polo is fine at most. Where a house asks for more, it is noted on that evening\'s entry.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🚫</span><div class="rule-text"><strong>What not to wear to dinner</strong>Shorts, athletic wear, sandals and flip-flops are out at any serious restaurant. Trainers are tolerated in many places and quietly unwelcome at the best counters.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🧦</span><div class="rule-text"><strong>Shoes come off more often than you expect</strong>Tatami rooms, private dining rooms and some counters all require it. Wear shoes you can slip off without sitting down, and socks you would be happy to be seen in.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🎒</span><div class="rule-text"><strong>Travel light to dinner</strong>Counter seating leaves little room for coats and bags. Most houses will take a coat; a large rucksack is a genuine problem in a ten-seat room.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">🧥</span><div class="rule-text"><strong>Layers, not bulk</strong>Dining rooms are warm and the streets in February are not. A light coat over a shirt beats a heavy jumper you cannot remove gracefully.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">💍</span><div class="rule-text"><strong>Watches and bracelets at the counter</strong>Remove them before you sit at a hinoki counter — covered under Dining Etiquette, but worth planning for before you dress.</div></div>'
+    +'</div>'
+    +'<div class="section-label">Getting Around</div>'
+    +'<div class="util-card"><ul class="info-list">'
+    +'<li><span class="info-emoji">📍</span><div class="info-text"><strong>Every stop carries its own buttons</strong>Each entry on your itinerary has <strong>Maps</strong>, <strong>Nav</strong>, <strong>Taxi</strong> and <strong>Copy</strong>. Maps opens the venue in Google Maps, where the address appears in Japanese — the form a driver, concierge or passer-by will recognise. Copy puts it on your clipboard.</div></li>'
+    +'<li><span class="info-emoji">🚕</span><div class="info-text"><strong>Show the driver</strong>The Taxi button opens a full-screen card in Japanese: the venue name, its address, and a line asking to be taken there. Hand your phone to the driver — no pronunciation required.</div></li>'
+    +'<li><span class="info-emoji">📱</span><div class="info-text"><strong>IC cards — tap and go</strong>Suica or Pasmo covers subway, bus and local JR, and doubles as payment in convenience stores.</div></li>'
+    +'<li><span class="info-emoji">🚖</span><div class="info-text"><strong>Taxis</strong>The rear door opens and closes by itself — stand clear and do not reach for it. Cards are widely accepted; tipping is not. The GO app works nationwide.</div></li>'
+    +'<li><span class="info-emoji">🤫</span><div class="info-text"><strong>Train manners</strong>No phone calls in any carriage, and no eating on local trains or the subway. Priority seats near the doors are left free when anyone may need them.</div></li>'
+    +'<li><span class="info-emoji">↔️</span><div class="info-text"><strong>Which side to stand</strong>Escalators: stand on the left in Tokyo, walk on the right.</div></li>'
+    +'<li><span class="info-emoji">🌙</span><div class="info-text"><strong>Last trains</strong>Most lines stop between midnight and 1 a.m. After a late dinner a taxi is usually the easier answer, and your hotel will call one for you.</div></li>'
+    +'</ul></div>'
+    ;
+  var jEl=document.getElementById('fx-jpy'),uEl=document.getElementById('fx-usd');
+  function num(el){var x=parseFloat(String(el.value).replace(/[^0-9.]/g,''));return isNaN(x)?NaN:x;}
+  function fmtY(n){return n.toLocaleString('en-US',{maximumFractionDigits:0});}
+  function fmtU(n){return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function fJ(){var v=num(jEl);uEl.value=isNaN(v)?'':fmtU(v/FX_RATE);}
+  function fU(){var v=num(uEl);jEl.value=isNaN(v)?'':fmtY(Math.round(v*FX_RATE));}
+  jEl.addEventListener('input',fJ);uEl.addEventListener('input',fU);
+  jEl.addEventListener('blur',function(){var v=num(jEl);jEl.value=isNaN(v)?'':fmtY(v);});
+  uEl.addEventListener('blur',function(){var v=num(uEl);uEl.value=isNaN(v)?'':fmtU(v);});
+  document.getElementById('fx-swap').addEventListener('click',function(){
+    var jv=num(jEl),uv=num(uEl);
+    jEl.value=isNaN(uv)?'':fmtY(Math.round(uv*FX_RATE));
+    uEl.value=isNaN(jv)?'':fmtU(jv/FX_RATE);
+  });
+  fJ();
 }
 
 /* ══════════════ RENDER: EMERGENCY ══════════════ */
@@ -949,8 +1027,8 @@ function renderEmergency(){
 ═══════════════════════════════════════════════════════ */
 var HCIStatement=(function(){
   var BLOBS={
-    guest:'edxD8OPQZ/Q+U8TKPcgbNQMrLBCCCD+5tL7+AkVF+/dQ57MLgwwNJ8TbsRYGvkIYuvU0DwEJ2bI2zrjuHaJhMXKhek7SVWLFA6Xmhp71Wp+einXuZojrfFTCYbe5zdXAybkKwIuBV7kNtzA8CXg8h8g/AJIOW/LN4Z/bmTVQGcQS494RvWaFM/TPIE6GzWkU2Qe9J3g1mxqPSoAhwlbb5vo2l+C8Zfh4udp1rT26aW83s3eBhD/690AHUpwaypkVrtglQZb/nRR5Ll4sq8cCgolbOwthSBwgcKADQitZZnYzXC2O6OhVNNARHG6MA0hDzsJE+nGqRmxbAGA+wguluDesauhQOwY5I0BGS4x69EgMFBjLvy7+pF/rO79ICSak9twgrJM/G0WRq72vKWzf49ZOgkC6zyacfStYoECLIzltT42KHx/EX3AKMQf01zU57OCy0Yli3WytXCNw2wnIvu1F2eUtA+ph+UF+rhfDQ32g7GGekbwnjaHisTKIwWkPbSMNd42oN7L3kfY+8uPGQzEX6G6CmYbDXAbpt8yHIXnFI8Lec2evYkdLFgYaP7VKvj7n36TFNiVs/qX6RuXdT9DNmM1fAFgo9cG8lMHrauKonx69XNcaA2utvu5K4UnWd0l/jb0jjsHuEP73HMXdfJRTAmMqcUOfnvD3V3sI0VAMZDWMGKJ8QU0D86d1hrTuc0xJ1TIh79GMCmOyLzRrE+VspVuiNlj0mtDooxngB5HQuZUA+n2L5rHOm5khauPZEz0z94vBssOWH22y1Z3fUK0cCPSx5tLgdnUaT43LCzoKom2LzGyTVjrjGDDefKz26i8GTOLAHIPisX3s0yLSTG14J8OC5ecmhjPHlKVCpDA5gnF98KbnPzz5xzwI/Sb7NhyNK8ub33XPvLfgTik2PtsoJDBlKK4iGQVIm16cQerNge0Stxqlf4ZuThPgZplPM+rMRoZ//WZngs9rbp2EP+LYTF5W07kf8bCfYSQ1zLL39H2eRhMvnssngscGbqqsSbKURcQGpZv+oqzwwxALcF4lzdu9fwGxBwm1/xZomIEBRVHf5wSVjlOYsfNxIErZLx6ZBXmLMr4IPvEBZlXyrllP8HtPHT1duVfP+C4ZAvvHt/xP8vShnZkfXKaURyjCGbQZdBT4Y6ji/5nqQE+LRVXAEOXoRoFbrcZdjAc60577vAwMKTI/5oXidHx43DqlTVZgoK3bhupkNYbNI6RKI8DYA65cUP3G3JnttMTPxzB8JB8E3G72oyczwoapFlqDUWHZ1ezulFsbhkRM/VqBtGlm+xsrs3Ii7oJaeFnMXf2inEBV3FaJr4VeHaB3EDx0TiLKOgsyuOkKWsxVg3+HaDBkEfzzNM+ha7CxoxceMGnGB+RLb5JWfDFIEfB0iuN4DXShQ0/rQgHZI9zt',
-    staff:'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'
+    guest:'itnvAdRe+mmzBF9sNiYd+pxU9Mu1xskiw1BqT977powEPlvlKYN9+M0k5IbI9waARIZ/Ld2oRZAnshsmXdEsoaJZfQXHVJahrEY4dUdoSzGvK7+OoWEh538kNL13rqW/CqMZSQ89Yf0yb9Aaut/Qxpk50/hCyEPsDJ0ZpnkWT2Sf54IX/doja/3f6zd9k+7iUm5uJP3Kmw7vLIgYI0Akll8KttHrV/9wsk58gpmQ86bq0l2iLb0+VlzzpGEy49fOS8/6qmW4NZNjv14lzY8Y/NFy7eP4H69cmp7oJSM9CIa01GIHb0y3bP75hFYGdXbZzVwguvTdrD7JS5evO+20gWpF4HSlXdxWI0wSAQ0vr+vuvghGRU3CN+QsSxEsnPa05j1i8KyOniRevxJy2x+GRIjgk6nTsiNQbYmYGryLHiwnvi5EZ8Q1xBgUElxwIRIJzv35kPl1v0pDlaFSyW8NgkXTpakUnuc4lCHhO+slecjySIRZ9SsAZgUbhqhUBVdeW5o7Cfm6SPJy6xfDFoaFCafJD7t/ZFMM40XcrmBUVX9H5IxeXqU2g9+ao2yY+ZTXGJoQc/RrRl519GYW4+f1vvuwSAoOj1Hjq08hdmfkBtcWdASTuI5oLtVurjNxb5VRwmPUDVvDbgGHRoKMlYYPk6QCH8vYAUjxIMUEEtZy3TeOV/kyamZuCPk/r/dgj4PYbfnwoUCynEpOxelU19/sqqyJURNbm2tXwhgnBxpvjlNPq0e9cFGnEAE0D+m96veTJ0zROEt0If7iymTQKrmGzjy1UsX8TuciugNUWdZOiqPv5rZnwCv2Tc9Pyt5/bAdG9L7NNrKTRknL87cVExfXBFLXUdOFW9audQ61i4H0bSVGM3bavFZCtVCimjmo4YT7YVfHpF2DTFQJ0kcUoXao1qi3IojPE6lLPqcKSxklTBeHS1onIst2Wm6n4QHnIFgR+OWBJnNBgIFgA9c/484HrPnLWLW1RAAO0QXV1EYUcg0dDHXNWXcULWaWONzNHK5iCzVW3G3GqWpbLWDPztAQsfPvIyhYeOwNNQeG54/nlKQcBdMZ00f44EgdE8RhXuS/pxipsqKW57DDsxA4rS9Sop/tVuoQHe7LrFSskVDnGC9od8XU8bohwGeEo9QTVjXjDAuGHR4XO6Y/1pioyRuwQ6VXzfVemgF0ZqQJ7LBMbp57Iz8Zn8yNfP3Owq0qHSbYRx3JO3vJE9suPlNsQF0U6yCJwoy3vano2Bm/uwVFfscp+SioaMq81Or9HpfkTQ6KYGT8jgAQNnK0eF0sEWZUwQNIxHiGGrvNuXJJVLTmexnsalQYX3h9fl4hgxzki4WrXTu9f/DaLjLZROmL6eMb3Y3T/HZHxRfHdDp5vN5l9LYV1uFQJ4JLOr42VqIHArvZvDTHR5s7x+J7GAto',
+    staff:'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'
   };
   var ITER=250000, IDLE_MS=120000, idleTm=null, unlocked=false;
   function el(){return document.getElementById('tab-statement');}
